@@ -1,8 +1,9 @@
-let contacts = require('../models/contacts');
+
+let contact = require('../models/contact');
 
 module.exports.create = async function (req, res, next) {
     try {
-        let newContact = new contacts(req.body);
+        let newContact = new contact(req.body);
 
         let result = await contacts.create(newContact);
         res.json(
@@ -19,7 +20,8 @@ module.exports.create = async function (req, res, next) {
 
 module.exports.list = async function (req, res, next) {
     try {
-        let list = await contacts.find({}, '-password');
+
+        let list = await contact.find({}, '-password');
 
         res.json(list);
     } catch (error) {
@@ -32,7 +34,8 @@ module.exports.contactGet = async function (req, res, next) {
     try {
         let cID = req.params.contactID;
 
-        req.contact = await contacts.findOne({ _id: cID }, '-password');
+
+        req.contact = await contact.findOne({ _id: cID }, '-password');
         next();
 
     } catch (error) {
@@ -50,10 +53,11 @@ module.exports.update = async function (req, res, next) {
     try {
         let cID = req.params.contactID;
 
-        let updateContact = new contacts(req.body);
+
+        let updateContact = new contact(req.body);
         updateContact._id = cID;
 
-        let result = await contacts.updateOne({ _id: cID }, updateContact);
+        let result = await contact.updateOne({ _id: cID }, updateContact);
         console.log(result);
 
         if (result.modifiedCount > 0) {
@@ -77,7 +81,8 @@ module.exports.remove = async function (req, res, next) {
     try {
         let cID = req.params.contactID;
 
-        let result = await contacts.deleteOne({ _id: cID });
+
+        let result = await contact.deleteOne({ _id: cID });
         console.log(result);
 
         if (result.deletedCount > 0) {
