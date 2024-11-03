@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-let contactsController = require('../controllers/contacts');
+let contactsController = require('../controllers/contact');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
